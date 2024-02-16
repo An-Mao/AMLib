@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "anmao.mc.amlib.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "AMLib.refmap.json",
+  "mixins": [
+    "EntityMixin",
+    "RangedAttributeMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
