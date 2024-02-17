@@ -1,4 +1,4 @@
-package anmao.mc.amlib.test;
+package anmao.mc.amlib.amlib.test;
 
 import anmao.mc.amlib.AMLib;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -9,6 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 public class RenderTest {
     @SubscribeEvent
     public static void onHurt(LivingHurtEvent event){
-        System.out.println(event.getEntity().getName()+"::"+event.getEntity().getMaxHealth());
+        //System.out.println(event.getEntity().getName()+"::"+event.getEntity().getHealth()+"::"+event.getEntity().getMaxHealth());
     }
 }

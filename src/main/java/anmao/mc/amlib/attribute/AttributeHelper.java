@@ -7,9 +7,26 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
+import java.util.Collection;
+
 public class AttributeHelper {
     public static AttributeInstance getAttribute(LivingEntity entity, Attribute attribute){
         return entity.getAttribute(attribute);
+    }
+    public static double getAttributeModifierValue(Collection<AttributeModifier> attlist) {
+        double dadd = 0;
+        double dbase = 0;
+        double dtotal = 1;
+        for (AttributeModifier al : attlist) {
+            if(al.getOperation() == AttributeModifier.Operation.ADDITION){
+                dadd += al.getAmount();
+            } else if (al.getOperation() == AttributeModifier.Operation.MULTIPLY_BASE) {
+                dbase += al.getAmount();
+            } else if (al.getOperation() == AttributeModifier.Operation.MULTIPLY_TOTAL) {
+                dtotal *= 1.0D + al.getAmount();
+            }
+        }
+        return (dadd + dadd * dbase) * dtotal;
     }
     public static void setAttribute(LivingEntity entity, Attribute attribute, AttributeModifier modifier){
         AttributeInstance att = getAttribute(entity,attribute);

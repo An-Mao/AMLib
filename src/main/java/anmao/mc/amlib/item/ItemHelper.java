@@ -1,5 +1,6 @@
 package anmao.mc.amlib.item;
 
+import anmao.mc.amlib.attribute.AttributeHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,25 +28,9 @@ public class ItemHelper {
     public static double getItemDamage(ItemStack itemStack){
         double damage;
         Collection<AttributeModifier> atk = itemStack.getAttributeModifiers(EquipmentSlot.MAINHAND).get(Attributes.ATTACK_DAMAGE);
-        damage = getAttributeModifierDamage(atk);
+        damage = AttributeHelper.getAttributeModifierValue(atk);
         return damage;
     }
-    public static double getAttributeModifierDamage(Collection<AttributeModifier> attlist) {
-        double dadd = 0;
-        double dbase = 0;
-        double dtotal = 1;
-        for (AttributeModifier al : attlist) {
-            if(al.getOperation() == AttributeModifier.Operation.ADDITION){
-                dadd += al.getAmount();
-            } else if (al.getOperation() == AttributeModifier.Operation.MULTIPLY_BASE) {
-                dbase += al.getAmount();
-            } else if (al.getOperation() == AttributeModifier.Operation.MULTIPLY_TOTAL) {
-                dtotal *= 1.0D + al.getAmount();
-            }
-        }
-        return (dadd + dadd * dbase) * dtotal;
-    }
-
 
     public static boolean hasEnchant(ItemStack itemStack, Enchantment enchantment){
         return itemStack.getEnchantmentLevel(enchantment) > 0;

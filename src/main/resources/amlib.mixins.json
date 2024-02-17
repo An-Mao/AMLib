@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "AMLib.refmap.json",
   "mixins": [
+    "AttributeMixin",
     "EntityMixin",
     "RangedAttributeMixin"
   ],
