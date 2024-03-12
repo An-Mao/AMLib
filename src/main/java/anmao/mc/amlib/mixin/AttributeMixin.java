@@ -1,7 +1,6 @@
 package anmao.mc.amlib.mixin;
 
-import anmao.mc.amlib.amlib.config.Config;
-import anmao.mc.amlib.amlib.config.attribute.AttributeConfig;
+import anmao.mc.amlib.amlib.config.Configs;
 import anmao.mc.amlib.amlib.config.attribute.AttributeData;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import org.spongepowered.asm.mixin.Final;
@@ -19,8 +18,8 @@ public class AttributeMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void amlib$init$fix(String pDescriptionId, double pDefaultValue, CallbackInfo ci) {
-        if (Config.config.isMixinAttributes()){
-            AttributeData attributeData = AttributeConfig.config.get(pDescriptionId);
+        if (Configs.general.getDatas().isMixinAttributes()){
+            AttributeData attributeData = Configs.attribute.getConfig(pDescriptionId);
             if (attributeData != null) {
                 this.defaultValue = attributeData.getDef();
             }

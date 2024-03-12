@@ -1,34 +1,14 @@
 package anmao.mc.amlib.amlib.config.attribute;
 
 import anmao.mc.amlib.CDT;
-import com.google.gson.Gson;
+import anmao.mc.amlib.json.JsonConfig;
 import com.google.gson.reflect.TypeToken;
-import com.mojang.logging.LogUtils;
-import org.slf4j.Logger;
 
-import java.io.*;
-import java.lang.reflect.Type;
 import java.util.Map;
 
-public class AttributeConfig {
-    private static final Logger LOGGER = LogUtils.getLogger();
-    private static final String configFile = CDT.ConfigDir +"attribute-config.json";
-    static {
-        init();
-    }
-
-
-    public static Map<String, AttributeData> config;
-    public static void init(){
-        File file = new File(configFile);
-        if (!file.exists()){
-            reset();
-        }
-        load();
-    }
-    private static void reset(){
-        try (FileWriter writer = new FileWriter(configFile)) {
-            writer.write("""
+public class AttributeConfig extends JsonConfig<Map<String, AttributeData>> {
+    public AttributeConfig() {
+        super(CDT.ConfigDir +"attribute-config.json", """
                     {
                       "attribute.name.generic.max_health": {
                         "min": 1.0,
@@ -50,18 +30,10 @@ public class AttributeConfig {
                         "def": 0.0,
                         "max": 999999999999999.0
                       }
-                    }""");
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage());
-        }
+                    }""", new TypeToken<>() {
+        });
     }
-    private static void load(){
-        Gson gson = new Gson();
-        try (Reader reader = new FileReader(configFile)) {
-            Type type = new TypeToken<Map<String, AttributeData>>() {}.getType();
-            config = gson.fromJson(reader, type);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
-        }
+    public AttributeData getConfig(String key){
+        return getDatas().get(key);
     }
 }

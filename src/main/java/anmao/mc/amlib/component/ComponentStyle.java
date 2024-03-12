@@ -6,7 +6,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class ComponentStyle extends ComponentStyleCDT{
