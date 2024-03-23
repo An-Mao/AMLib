@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class GeneralConfig extends JsonConfig<GeneralConfigData> {
     public GeneralConfig() {
-        super(CDT.ConfigDir +"config.json", """
+        super(CDT.ConfigDir +"general.json", """
                     {
                       "mixinAttributes": true,
                       "showTipGui": true

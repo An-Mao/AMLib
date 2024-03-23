@@ -5,6 +5,7 @@ import anmao.mc.amlib.amlib.network.easy_net.EasyNetCTS;
 import anmao.mc.amlib.amlib.network.easy_net.EasyNetSTC;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -49,7 +50,17 @@ public class Net {
     public static <MSG> void EasyNetCTS(MSG msg){
         EASY_NET.sendToServer(msg);
     }
+    @Deprecated
     public static <MSG> void EasyNetSTC(MSG msg, ServerPlayer serverPlayer){
-        EASY_NET.send(PacketDistributor.PLAYER.with(()->serverPlayer), msg);
+        EasyNetSTC(PacketDistributor.PLAYER.with(()->serverPlayer), msg);
+    }
+    public static <MSG> void EasyNetSTP(MSG msg, ServerPlayer serverPlayer){
+        EasyNetSTC(PacketDistributor.PLAYER.with(()->serverPlayer), msg);
+    }
+    public static <MSG> void EasyNetSTTE(MSG msg, Entity entity){
+        EasyNetSTC(PacketDistributor.TRACKING_ENTITY.with(()->entity), msg);
+    }
+    public static <MSG> void EasyNetSTC(PacketDistributor.PacketTarget target, MSG msg){
+        EASY_NET.send(target, msg);
     }
 }

@@ -17,22 +17,26 @@ public abstract class RenderWidgetCore extends AbstractWidget implements Rendera
     protected ResourceLocation texture;
     protected Font font;
     protected float fontWidth;
-    protected final DT_XYWH widget_xywh;
     protected int bgUsualColor, bgSelectColor;
     protected DT_XYWHUV bgSelect = null , bgNormal = null;
     protected int layerZ = 1000;
+    public RenderWidgetCore(int x,int y,int w,int h, Component pMessage) {
+        this(Minecraft.getInstance().font,x,y,w,h,pMessage);
+    }
     public RenderWidgetCore(DT_XYWH dt_xywh, Component pMessage) {
         this(Minecraft.getInstance().font,dt_xywh,pMessage);
     }
     public RenderWidgetCore(Font font, DT_XYWH dt_xywh, Component pMessage) {
-        super(dt_xywh.x(), dt_xywh.y(), dt_xywh.width(), dt_xywh.height(), pMessage);
+        this(font,dt_xywh.x(), dt_xywh.y(), dt_xywh.width(), dt_xywh.height(), pMessage);
+    }
+
+    public RenderWidgetCore(Font font,int x,int y,int w,int h, Component pMessage) {
+        super(x, y, w, h, pMessage);
         this.font = font;
         this.fontWidth = this.font.width("a");
-        this.widget_xywh = dt_xywh;
         this.bgUsualColor = Color.gray.getRGB();
         this.bgSelectColor = Color.LIGHT_GRAY.getRGB();
     }
-
     public void setLayerZ(int layerZ) {
         this.layerZ = layerZ;
     }
@@ -87,7 +91,7 @@ public abstract class RenderWidgetCore extends AbstractWidget implements Rendera
         drawSquare(guiGraphics,dt_xywh.x(),dt_xywh.y(),dt_xywh.width(),dt_xywh.height(),color);
     }
     public void drawSquare(GuiGraphics guiGraphics,int color){
-        drawSquare(guiGraphics,widget_xywh.x(),widget_xywh.y(),widget_xywh.width(),widget_xywh.height(),color);
+        drawSquare(guiGraphics,getX(),getY(),getWidth(),getHeight(),color);
     }
 
     @Override

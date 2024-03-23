@@ -20,6 +20,9 @@ public class ListBox extends RenderWidgetCore{
     private DT_XYWHUV bg;
     private int bgColor,textSelectColor,textColor;
     private int left = 0,top = 0,strX,strY;
+    public ListBox(int x,int y,int w,int h,int elementalWidth,int elementalHeight, Component pMessage,DT_ListBoxData... data) {
+        this(new DT_XYWH(x,y,w,h),elementalWidth, elementalHeight,pMessage, Arrays.asList(data));
+    }
     public ListBox(DT_XYWH dt_xywh,int elementalWidth,int elementalHeight, Component pMessage,DT_ListBoxData... data) {
         this(dt_xywh,elementalWidth, elementalHeight,pMessage, Arrays.asList(data));
     }
@@ -81,12 +84,12 @@ public class ListBox extends RenderWidgetCore{
     }
     public void setVSpace(int vSpace) {
         this.vSpace = vSpace;
-        this.line = widget_xywh.height() / (elementalHeight + vSpace);
+        this.line = getHeight() / (elementalHeight + vSpace);
     }
 
     public void setHSpace(int hSpace) {
         this.hSpace = hSpace;
-        this.row = widget_xywh.width() / (elementalWidth + hSpace);
+        this.row = getWidth() / (elementalWidth + hSpace);
     }
 
     public void setBgColor(int bgColor) {
@@ -114,6 +117,7 @@ public class ListBox extends RenderWidgetCore{
         PoseStack poseStack = pGuiGraphics.pose();
         poseStack.pushPose();
         poseStack.translate(0, 0, layerZ);
+        int idex = -1;
         if (texture != null){
             drawImage(pGuiGraphics,bg);
             for (int i = 0;i < line;i++){
@@ -131,8 +135,8 @@ public class ListBox extends RenderWidgetCore{
                                     && pMouseY < dy+ elementalHeight) {
                                 bg = new DT_XYWHUV(dx,dy,elementalWidth,elementalHeight,bgSelect.getUOffset(),bgSelect.getVOffset());
                                 tc = textSelectColor;
-                                index = ni;
-                                pGuiGraphics.renderTooltip(font,getData(index).getTooltip(), Optional.empty(),pMouseX,pMouseY);
+                                idex = ni;
+                                pGuiGraphics.renderTooltip(font,getData(ni).getTooltip(), Optional.empty(),pMouseX,pMouseY);
                             }
                             drawImage(pGuiGraphics,bg);
                             drawString(pGuiGraphics,dx,dy + strY,tc,FixStrWidth(getDataComponent(ni)));
@@ -143,7 +147,7 @@ public class ListBox extends RenderWidgetCore{
                 }
             }
         }else {
-            drawSquare(pGuiGraphics,widget_xywh,bgColor);
+            drawSquare(pGuiGraphics,bgColor);
             for (int i = 0;i < line;i++){
                 int dy = left + getY() + i * (elementalHeight + vSpace);
                 for (int r = 0; r < row; r++){
@@ -159,8 +163,8 @@ public class ListBox extends RenderWidgetCore{
                                     && pMouseY < dy+ elementalHeight) {
                                 bgc = bgSelectColor;
                                 tc = textSelectColor;
-                                index = ni;
-                                pGuiGraphics.renderTooltip(font,getData(index).getTooltip(), Optional.empty(),pMouseX,pMouseY);
+                                idex = ni;
+                                pGuiGraphics.renderTooltip(font,getData(ni).getTooltip(), Optional.empty(),pMouseX,pMouseY);
                             }
                             drawSquare(pGuiGraphics, dx, dy, elementalWidth, elementalHeight, bgc);
                             drawString(pGuiGraphics, dx, dy + strY, tc, FixStrWidth(getDataComponent(ni)));
@@ -171,6 +175,7 @@ public class ListBox extends RenderWidgetCore{
                 }
             }
         }
+        index = idex;
         poseStack.popPose();
     }
     public void renderImageElemental(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY){
