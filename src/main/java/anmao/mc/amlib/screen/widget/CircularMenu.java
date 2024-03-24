@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import org.joml.AxisAngle4d;
 import org.joml.Quaternionf;
@@ -205,7 +206,6 @@ public class CircularMenu extends RenderWidgetCore {
                     PoseStack pose = guiGraphics.pose();
                     pose.pushPose();
                     //double rad = fanAngle * (i + 2)  + fanTextAngle;
-
                     //当前扇形起始角度
                     double rad = fanAngle * i;
                     //移动至中心
@@ -223,10 +223,7 @@ public class CircularMenu extends RenderWidgetCore {
                     pose.mulPose(Axis.ZP.rotationDegrees((float) fanTextAngle));
                     // 文本高为低，等腰三角形的角度
                     //pose.mulPose(Axis.ZP.rotationDegrees((float) -getTextAngle(font.lineHeight,getFanTextInnerSpace())));
-
-                    //pose.mulPose(new Quaternionf(new AxisAngle4d(Math.toRadians(rad),0,0,1)));
                     //pose.translate(getFanTextInnerSpace(),0,0);
-                    //pose.mulPose(new Quaternionf(new AxisAngle4d(Math.toRadians(fanAngle / font.lineHeight),0,0,1)));
                     DT_ListBoxData boxData = getData(sIndex);
                     String st = boxData.getComponent().getString();
                     st =font.plainSubstrByWidth(st,outerRadius - getFanTextInnerSpace());
