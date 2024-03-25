@@ -2,31 +2,28 @@ package anmao.mc.amlib.screen.widget;
 
 import anmao.mc.amlib.debug.DeBug;
 import anmao.mc.amlib.math._Math;
+import anmao.mc.amlib.math._MathCDT;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
-import org.joml.AxisAngle4d;
-import org.joml.Quaternionf;
 
 import java.awt.*;
 import java.util.List;
 
 public class CircularMenu extends RenderWidgetCore {
-    private FlipMode flipMode;
-    private int sectors;
-    private int textNormalColor , textSelectColor;
-    private int innerRadius , outerRadius;
-    private double addAngle;
-    private double fanAngle , fanArc;
-    private double fanTextAngle;
-    private List<DT_ListBoxData> data ;
-    private int index = -1;
-    private int startIndex = 0;
-    private int fanTextInnerSpace;
+    protected FlipMode flipMode;
+    protected int sectors;
+    protected int textNormalColor , textSelectColor;
+    protected int innerRadius , outerRadius;
+    protected double fanAngle , fanArc;
+    protected double fanTextAngle;
+    protected List<DT_ListBoxData> data ;
+    protected int index = -1;
+    protected int startIndex = 0;
+    protected int fanTextInnerSpace;
     public CircularMenu(int x, int y, int w, int h, Component message, DT_ListBoxData... data) {
         this(x, y, w, h,message, List.of(data));
     }
@@ -56,7 +53,6 @@ public class CircularMenu extends RenderWidgetCore {
         setTextNormalColor(Color.green.getRGB());
         setTextSelectColor(Color.YELLOW.getRGB());
         setFlipMode(FlipMode.tire);
-        setAddAngle(Math.PI /  180);
         setFanTextInnerSpace(10);
     }
 
@@ -98,10 +94,6 @@ public class CircularMenu extends RenderWidgetCore {
         setFanTextAngle(fanAngle / 2d);
     }
 
-    public void setAddAngle(double addAngle) {
-        this.addAngle = addAngle;
-    }
-
     public void setOuterRadius(int outerRadius) {
         this.outerRadius = outerRadius;
     }
@@ -132,7 +124,6 @@ public class CircularMenu extends RenderWidgetCore {
     }
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        System.out.println("button:"+pButton);
         if (this.active && this.visible && this.flipMode == FlipMode.button) {
             if (pButton == 0){
                 if (startIndex >= sectors){
@@ -203,50 +194,83 @@ public class CircularMenu extends RenderWidgetCore {
                 drawSector(centerX,centerY,startAngle,endAngle,bgc);
 
                 if (isValidIndex(sIndex)) {
+                    DT_ListBoxData boxData = getData(sIndex);
+                    drawName(guiGraphics,fanAngle * i,centerX,centerY,boxData.getComponent().getString(),tc);
+                    /*
                     PoseStack pose = guiGraphics.pose();
                     pose.pushPose();
-                    //double rad = fanAngle * (i + 2)  + fanTextAngle;
-                    //当前扇形起始角度
                     double rad = fanAngle * i;
-                    //移动至中心
+                    double[] xyc = getArcCenter(getFanTextInnerSpace(),startAngle,fanAngle);
+                    System.out.println("xyc::"+ Arrays.toString(xyc));
+                    pose.translate(xyc[0],xyc[1],0);
+
                     pose.translate(centerX,centerY,0);
-                    //计算文本位置
                     double theta = Math.toRadians(rad);
                     double cx = getFanTextInnerSpace() * Math.cos(theta);
                     double cy = getFanTextInnerSpace() * Math.sin(theta);
-                    //移动文本渲染位置
                     pose.translate(cx,cy,0);
-                    // 旋转至对应角度
-                    pose.mulPose(Axis.ZP.rotationDegrees((float) rad));
-
-                    // 半个扇形的角度
+                    pose.mulPose(Axis.ZP.rotationDegrees((float) rad ));
                     pose.mulPose(Axis.ZP.rotationDegrees((float) fanTextAngle));
-                    // 文本高为低，等腰三角形的角度
-                    //pose.mulPose(Axis.ZP.rotationDegrees((float) -getTextAngle(font.lineHeight,getFanTextInnerSpace())));
-                    //pose.translate(getFanTextInnerSpace(),0,0);
                     DT_ListBoxData boxData = getData(sIndex);
                     String st = boxData.getComponent().getString();
                     st =font.plainSubstrByWidth(st,outerRadius - getFanTextInnerSpace());
                     guiGraphics.drawString(font, st, 0, 0, tc,false);
                     pose.popPose();
+                     */
+
                 }
             }
         }
     }
-    private double getTextAngle(double b,double h){
+    protected void drawName(GuiGraphics guiGraphics, double rad, int centerX, int centerY, String name, int color){
+        PoseStack pose = guiGraphics.pose();
+        pose.pushPose();
+        pose.translate(centerX,centerY,0);
+        double theta = Math.toRadians(rad);
+        double cx = getFanTextInnerSpace() * Math.cos(theta);
+        double cy = getFanTextInnerSpace() * Math.sin(theta);
+        pose.translate(cx,cy,0);
+        pose.mulPose(Axis.ZP.rotationDegrees((float) rad ));
+        pose.mulPose(Axis.ZP.rotationDegrees((float) fanTextAngle));
+
+        name =font.plainSubstrByWidth(name,outerRadius - getFanTextInnerSpace());
+        guiGraphics.drawString(font, name, 0, 0, color,false);
+        pose.popPose();
+    }
+    protected double getArc(double angleDegrees,double radius){
+        return (angleDegrees / 360.0) * (2 * Math.PI * radius);
+    }
+    protected double[] getArcCenter(double radius,double theta,double alpha){
+        double x1 = radius * Math.cos(theta);
+        double y1 = radius * Math.sin(theta);
+        double x2 = radius * Math.cos(theta + alpha);
+        double y2 = radius * Math.sin(theta + alpha);
+        double xm = (x1 + x2) / 2;
+        double ym = (y1 + y2) / 2;
+        double xc = xm + radius * Math.sin(alpha / 2) * Math.cos(theta + alpha / 2);
+        double yc = ym + radius * Math.sin(alpha / 2) * Math.sin(theta + alpha / 2);
+        /*
+        System.out.println("弧的起点坐标：(" + x1 + ", " + y1 + ")");
+        System.out.println("弧的中点坐标：(" + xm + ", " + ym + ")");
+        System.out.println("弧的终点坐标：(" + x2 + ", " + y2 + ")");
+        System.out.println("弧的中心点坐标：(" + xc + ", " + yc + ")");
+         */
+        return new double[]{xc,yc};
+    }
+    protected double getTextAngle(double b,double h){
         double tanTheta = (b / 2) / h;
         double theta = Math.atan(tanTheta);
         double degreesTheta = Math.toDegrees(theta);
         return 180 - 2 * degreesTheta;
     }
-    private void drawSector(int centerX, int centerY, double startAngle, double endAngle, int color) {
+    protected void drawSector(int centerX, int centerY, double startAngle, double endAngle, int color) {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder buffer = tesselator.getBuilder();
         RenderSystem.disableCull();
         RenderSystem.enableBlend();
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         buffer.begin(VertexFormat.Mode.TRIANGLE_STRIP, DefaultVertexFormat.POSITION_COLOR);
-        for (double angle = startAngle; angle <= endAngle - addAngle; angle += addAngle) {
+        for (double angle = startAngle; angle <= endAngle - _MathCDT.ARC; angle += _MathCDT.ARC) {
             double x2 = centerX + Math.cos(angle) * outerRadius;
             double y2 = centerY + Math.sin(angle) * outerRadius;
             buffer.vertex(x2, y2, 0).color(color).endVertex();

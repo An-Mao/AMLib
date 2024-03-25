@@ -1,6 +1,12 @@
 package anmao.mc.amlib.system;
 
 public class _System {
+    public static final boolean isWindows;
+    static {
+        String os = System.getProperty("os.name").toLowerCase();
+
+        isWindows = os.contains("windows");
+    }
     public static boolean isModLoaded(String modId) {
         try {
             Class.forName(modId);

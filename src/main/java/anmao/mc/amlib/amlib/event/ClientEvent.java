@@ -28,6 +28,9 @@ public class ClientEvent {
 
     @SubscribeEvent
     public static void onKeyRegister(RegisterKeyMappingsEvent event){
+        /*
         event.register(KeyBinding.OPEN_MENU);
+
+         */
     }
 }

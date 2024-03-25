@@ -16,6 +16,7 @@ public class ForgeClientEvent {
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
+        /*
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             if (player.isAlive()) {
@@ -25,5 +26,7 @@ public class ForgeClientEvent {
                 }
             }
         }
+
+         */
     }
 }
