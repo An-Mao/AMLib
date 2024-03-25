@@ -1,7 +1,7 @@
 package anmao.mc.amlib.amlib.config;
 
-import anmao.mc.amlib.amlib.config.general.GeneralConfig;
 import anmao.mc.amlib.amlib.config.attribute.AttributeConfig;
+import anmao.mc.amlib.amlib.config.general.GeneralConfig;
 import anmao.mc.amlib.amlib.config.the_world.TheWorldConfig;
 
 public class Configs {

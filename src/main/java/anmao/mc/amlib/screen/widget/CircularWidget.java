@@ -2,21 +2,17 @@ package anmao.mc.amlib.screen.widget;
 
 import anmao.mc.amlib.debug.DeBug;
 import anmao.mc.amlib.math._Math;
-import anmao.mc.amlib.math._MathCDT;
 import anmao.mc.amlib.render.Draw;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.joml.Matrix4f;
 
 import java.awt.*;
 import java.util.List;
 
-public class CircularMenu extends RenderWidgetCore {
+public class CircularWidget extends RenderWidgetCore {
     protected FlipMode flipMode;
     protected int sectors;
     protected int textNormalColor , textSelectColor;
@@ -26,22 +22,22 @@ public class CircularMenu extends RenderWidgetCore {
     protected int index = -1;
     protected int startIndex = 0;
     protected int fanTextInnerSpace;
-    public CircularMenu(int x, int y, int w, int h, Component message, DT_ListBoxData... data) {
+    public CircularWidget(int x, int y, int w, int h, Component message, DT_ListBoxData... data) {
         this(x, y, w, h,message, List.of(data));
     }
-    public CircularMenu(int x, int y, int w, int h, Component message, List<DT_ListBoxData> data) {
+    public CircularWidget(int x, int y, int w, int h, Component message, List<DT_ListBoxData> data) {
         this(x, y, w, h,9,20,80, message,data);
     }
-    public CircularMenu(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, Component message, DT_ListBoxData... data) {
+    public CircularWidget(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, Component message, DT_ListBoxData... data) {
         this(x,y,w,h,sectors,innerRadius,outerRadius,message, List.of(data));
     }
-    public CircularMenu(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, Component message, List<DT_ListBoxData> data) {
+    public CircularWidget(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, Component message, List<DT_ListBoxData> data) {
         this(x,y,w,h,sectors,innerRadius,outerRadius,0x50646464,0x50898989,message,data);
     }
-    public CircularMenu(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, int highlightColor, int normalColor, Component message, DT_ListBoxData... data) {
+    public CircularWidget(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, int highlightColor, int normalColor, Component message, DT_ListBoxData... data) {
         this(x,y,w,h,sectors,innerRadius,outerRadius,highlightColor,normalColor,message,List.of(data));
     }
-    public CircularMenu(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, int highlightColor, int normalColor, Component message, List<DT_ListBoxData> data) {
+    public CircularWidget(int x, int y, int w, int h, int sectors, int innerRadius, int outerRadius, int highlightColor, int normalColor, Component message, List<DT_ListBoxData> data) {
         super(x, y, w, h, message);
         if (sectors < 1){
             DeBug.ThrowError("error sectors");

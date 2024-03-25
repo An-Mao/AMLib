@@ -2,8 +2,6 @@ package anmao.mc.amlib.amlib.event;
 
 import anmao.mc.amlib.AMLib;
 import anmao.mc.amlib.amlib.network.Net;
-import anmao.mc.amlib.amlib.util.KeyBinding;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
