@@ -19,7 +19,7 @@ public class _ArcMath extends _MathCDT{
         double centerY = (y1 + y2) / 2;
 
         // 输出结果
-        System.out.println("扇形中心位置：(" + centerX + ", " + centerY + ")");
+        //System.out.println("扇形中心位置：(" + centerX + ", " + centerY + ")");
         return new double[]{centerX,centerY};
     }
     protected double getArc(double angleDegrees,double radius){

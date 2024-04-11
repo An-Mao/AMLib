@@ -56,7 +56,7 @@ public class ImageButton extends AbstractWidget implements Renderable {
 
     @Override
     public void mouseMoved(double pMouseX, double pMouseY) {
-        System.out.println("-----move-----");
+        //System.out.println("-----move-----");
         if (!isMouseOver(pMouseX,pMouseY)){
             mouseType = MouseType.Normal;
         }else if (mouseType == MouseType.Normal){

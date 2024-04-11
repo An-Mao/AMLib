@@ -1,3 +1,7 @@
+
+
+
+
 buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
@@ -17,7 +21,15 @@ plugins {
 }
 
 apply plugin: 'org.spongepowered.mixin'
-
+jarJar.enable()
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 group = mod_group_id
 version = mod_version
 
@@ -163,8 +175,8 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '15.4'
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
