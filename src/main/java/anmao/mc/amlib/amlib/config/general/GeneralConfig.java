@@ -1,7 +1,7 @@
 package anmao.mc.amlib.amlib.config.general;
 
+import anmao.dev.easy_json.JsonConfig;
 import anmao.mc.amlib.CDT;
-import anmao.mc.amlib.json.JsonConfig;
 import com.google.gson.reflect.TypeToken;
 
 public class GeneralConfig extends JsonConfig<GeneralConfigData> {

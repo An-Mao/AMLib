@@ -10,7 +10,7 @@ public class Events {
     @SubscribeEvent
     public static void commonSetup(final FMLCommonSetupEvent event)
     {
-        //Net.reg();
+        //Net.register();
     }
 
 }

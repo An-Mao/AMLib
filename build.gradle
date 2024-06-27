@@ -12,11 +12,13 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
 apply plugin: 'org.spongepowered.mixin'
 
 jarJar.enable()
+build.dependsOn tasks.jarJar
 version = mod_version
 group = mod_group_id
 
@@ -75,7 +77,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '15.4'
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
-    //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     minecraftLibrary 'anmao.dev:easy_json:1.0.0'
     minecraftLibrary 'anmao.dev:easy_js:1.0.0'
 
@@ -119,13 +121,14 @@ jar {
                 "MixinConfigs": "${mod_id}.mixins.json"
         ])
     }
-    /*
+/*
     from('libs') {
         include '*.jar'
         into('META-INF/jarjar')
     }
 
-     */
+
+ */
 }
 // Example configuration to allow publishing using the maven-publish plugin
 publishing {
