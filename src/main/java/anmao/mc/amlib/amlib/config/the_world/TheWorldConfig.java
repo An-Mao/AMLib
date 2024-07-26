@@ -1,6 +1,6 @@
 package anmao.mc.amlib.amlib.config.the_world;
 
-import anmao.dev.easy_json.JsonConfig;
+import anmao.dev.core.json.JsonConfig;
 import anmao.mc.amlib.CDT;
 import com.google.gson.reflect.TypeToken;
 

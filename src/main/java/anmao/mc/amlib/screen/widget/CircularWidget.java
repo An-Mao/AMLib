@@ -1,7 +1,7 @@
 package anmao.mc.amlib.screen.widget;
 
-import anmao.mc.amlib.debug.DeBug;
-import anmao.mc.amlib.math._Math;
+import anmao.dev.core.debug.DeBug;
+import anmao.dev.core.math._Math;
 import anmao.mc.amlib.render.Draw;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

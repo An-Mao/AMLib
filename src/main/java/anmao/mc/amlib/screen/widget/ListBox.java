@@ -1,7 +1,7 @@
 package anmao.mc.amlib.screen.widget;
 
-import anmao.mc.amlib.color._ColorCDT;
-import anmao.mc.amlib.debug.DeBug;
+import anmao.dev.core.color._ColorCDT;
+import anmao.dev.core.debug.DeBug;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

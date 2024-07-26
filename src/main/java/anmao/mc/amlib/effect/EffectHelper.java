@@ -1,6 +1,6 @@
 package anmao.mc.amlib.effect;
 
-import anmao.mc.amlib.math._Random;
+import anmao.dev.core.math._Random;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;

@@ -78,12 +78,10 @@ dependencies {
     implementation group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '15.4'
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    minecraftLibrary 'anmao.dev:easy_json:1.0.0'
-    minecraftLibrary 'anmao.dev:easy_js:1.0.0'
+    minecraftLibrary 'anmao.dev:core:1.0.1'
 
 
-    jarJar(group:'anmao.dev', name:'easy_json', version:'[1.0.0,)')
-    jarJar(group:'anmao.dev', name:'easy_js', version:'[1.0.0,)')
+    jarJar(group:'anmao.dev', name:'core', version:'[1.0.1,)')
 }
 
 tasks.named('processResources', ProcessResources).configure {

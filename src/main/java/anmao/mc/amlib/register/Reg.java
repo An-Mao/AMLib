@@ -1,4 +1,4 @@
-package anmao.mc.amlib.mc.register;
+package anmao.mc.amlib.register;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;

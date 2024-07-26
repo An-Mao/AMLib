@@ -1,6 +1,6 @@
 package anmao.mc.amlib.component;
 
-import anmao.mc.amlib.color._ColorCDT;
+import anmao.dev.core.color._ColorCDT;
 import net.minecraft.network.chat.TextColor;
 
 public class ComponentStyleCDT extends _ColorCDT {

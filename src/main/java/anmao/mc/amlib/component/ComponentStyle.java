@@ -1,6 +1,6 @@
 package anmao.mc.amlib.component;
 
-import anmao.mc.amlib.math._Math;
+import anmao.dev.core.math._Math;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;

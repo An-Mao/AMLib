@@ -26,6 +26,6 @@ public class DrawImage {
         bufferbuilder.addVertex(matrix4f, (float)pX1, (float)pY2, (float)pBlitOffset).setUv(pMinU, pMaxV);//.endVertex();
         bufferbuilder.addVertex(matrix4f, (float)pX2, (float)pY2, (float)pBlitOffset).setUv(pMaxU, pMaxV);//.endVertex();
         bufferbuilder.addVertex(matrix4f, (float)pX2, (float)pY1, (float)pBlitOffset).setUv(pMaxU, pMinV);//.endVertex();
-        BufferUploader.drawWithShader(bufferbuilder.build());
+        BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
     }
 }

@@ -1,7 +1,7 @@
 package anmao.mc.amlib.screen.widget;
 
-import anmao.mc.amlib.color._ColorCDT;
-import anmao.mc.amlib.debug.DeBug;
+import anmao.dev.core.color._ColorCDT;
+import anmao.dev.core.debug.DeBug;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @OnlyIn(Dist.CLIENT)
 public class DropDownListBox extends DropDownListBoxCore {
     private final DT_XYWH dt_xywh;
-    private final List<DT_ListBoxData> dataList;
+    private List<DT_ListBoxData> dataList;
     private final Component msg;
     private int nowSelectIndex = -1;
     private boolean showList = false;
@@ -41,6 +41,18 @@ public class DropDownListBox extends DropDownListBoxCore {
         this.msg = pMessage;
         setLine(7);
     }
+    public void setDataList(DT_ListBoxData... data) {
+        setDataList(Arrays.asList(data));
+    }
+
+    public void setDataList(List<DT_ListBoxData> dataList) {
+        nowPage = 1;
+        nowSelectIndex = -1;
+        this.dataList = dataList;
+    }
+
+
+
     public void setLine(int line){
         this.line = line;
         lineHeight = this.dt_xywh.height() * line;
