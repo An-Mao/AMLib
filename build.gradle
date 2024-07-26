@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.142'
+    id 'net.neoforged.gradle.userdev' version '7.0.145'
 }
 
 jarJar.enable()
@@ -66,8 +66,7 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    jarJar(group:'anmao.dev', name:'easy_json', version:'[1.0.0,)')
-    jarJar(group:'anmao.dev', name:'easy_js', version:'[1.0.0,)')
+    jarJar(group:'anmao.dev', name:'core', version:'[1.0.2,)')
 }
 
 tasks.withType(ProcessResources).configureEach {
