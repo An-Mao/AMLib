@@ -61,8 +61,8 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-    config "${mod_id}.mixins.json"
+    add sourceSets.main, "refmap.${mod_id}.json"
+    config "mixins.${mod_id}.json"
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -78,10 +78,9 @@ dependencies {
     implementation group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '15.4'
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    minecraftLibrary 'anmao.dev:core:1.0.1'
+    minecraftLibrary "anmao.dev:core:$core_version"
 
-
-    jarJar(group:'anmao.dev', name:'core', version:'[1.0.1,)')
+    jarJar(group:'anmao.dev', name:'core', version:"[$core_version,)")
 }
 
 tasks.named('processResources', ProcessResources).configure {
@@ -91,6 +90,7 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description,
+            core_version: core_version,
     ]
     inputs.properties replaceProperties
 
@@ -116,7 +116,7 @@ tasks.named('jar', Jar).configure {
 jar {
     manifest {
         attributes([
-                "MixinConfigs": "${mod_id}.mixins.json"
+                "MixinConfigs": "mixins.${mod_id}.json"
         ])
     }
 /*
@@ -143,20 +143,12 @@ publishing {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8'
 }
 
 eclipse {
-    // Run everytime eclipse builds the code
-    //autoBuildTasks genEclipseRuns
-    // Run when importing the project
     synchronizationTasks 'genEclipseRuns'
 }
-
-// Merge the resources and classes into the same directory. 
-// This is done because java expects modules to be in a single directory.
-// And if we have it in multiple we have to do performance intensive hacks like having the UnionFileSystem
-// This will eventually be migrated to ForgeGradle so modders don't need to manually do it. But that is later.
 sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
     it.output.resourcesDir = dir
