@@ -1,17 +1,18 @@
-package anmao.mc.amlib.screen.widget;
+package anmao.mc.amlib.screen.widget.square;
 
 import anmao.dev.core.color._ColorCDT;
 import anmao.dev.core.debug.DeBug;
+import anmao.mc.amlib.screen.widget.DT_ListBoxData;
+import anmao.mc.amlib.screen.widget.DT_XYWHUV;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ListBox extends SquareWidgetCore<ListBox> {
+public class SquareListBox extends SquareWidgetCore<SquareListBox> {
     private List<DT_ListBoxData> data;
     private int dataSize;
     private int line ,row,index,startIndex;
@@ -20,7 +21,7 @@ public class ListBox extends SquareWidgetCore<ListBox> {
     private DT_XYWHUV bg;
     private int bgColor,textSelectColor,textColor;
     private int left = 0,top = 0,strX,strY;
-    public ListBox(int x,int y,int w,int h,int elementalWidth,int elementalHeight, Component pMessage,List<DT_ListBoxData> data) {
+    public SquareListBox(int x, int y, int w, int h, int elementalWidth, int elementalHeight, Component pMessage, List<DT_ListBoxData> data) {
         super(x,y,w,h,pMessage);
         this.data = data;
         this.dataSize = this.data.size();
@@ -46,7 +47,7 @@ public class ListBox extends SquareWidgetCore<ListBox> {
     }
 
     @Override
-    public ListBox setFont(Font font) {
+    public SquareListBox setFont(Font font) {
         super.setFont(font);
         setStrY();
         return self();

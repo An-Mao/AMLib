@@ -1,5 +1,6 @@
 package anmao.mc.amlib.screen.widget;
 
+import anmao.dev.core.math._Math;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,12 +18,13 @@ public abstract class RenderWidgetCore<T extends RenderWidgetCore<T>> extends Ab
     protected int messageWidth,singleCharacterWidth;
     protected int textUsualColor, textHoverColor, backgroundUsualColor, backgroundHoverColor;
     protected int layerZ = 1000;
+    protected int halfFontLine ;
     public RenderWidgetCore(int x,int y,int w,int h, Component pMessage) {
         this(Minecraft.getInstance().font,x,y,w,h,pMessage);
     }
     public RenderWidgetCore(Font font,int x,int y,int w,int h, Component pMessage) {
         super(x, y, w, h, pMessage);
-        this.font = font;
+        setFont(font);
         this.backgroundUsualColor = Color.gray.getRGB();
         this.backgroundHoverColor = Color.LIGHT_GRAY.getRGB();
     }
@@ -38,6 +40,7 @@ public abstract class RenderWidgetCore<T extends RenderWidgetCore<T>> extends Ab
         this.font = font;
         setMessageWidth();
         setSingleCharacterWidth();
+        halfFontLine = _Math.half(font.lineHeight);
         return self();
     }
 

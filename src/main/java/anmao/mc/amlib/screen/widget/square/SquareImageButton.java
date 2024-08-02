@@ -1,4 +1,4 @@
-package anmao.mc.amlib.screen.widget;
+package anmao.mc.amlib.screen.widget.square;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

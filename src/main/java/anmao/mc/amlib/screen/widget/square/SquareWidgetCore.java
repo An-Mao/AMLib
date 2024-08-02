@@ -1,5 +1,7 @@
-package anmao.mc.amlib.screen.widget;
+package anmao.mc.amlib.screen.widget.square;
 
+import anmao.mc.amlib.screen.widget.DT_XYWH;
+import anmao.mc.amlib.screen.widget.RenderWidgetCore;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
@@ -10,7 +12,7 @@ public abstract class SquareWidgetCore<T extends SquareWidgetCore<T>> extends Re
     protected void drawSquare(GuiGraphics guiGraphics, int x, int y, int width, int height, int color){
         guiGraphics.fill(x,y,x+width,y+height,color);
     }
-    protected void drawSquare(GuiGraphics guiGraphics,DT_XYWH dt_xywh,int color){
+    protected void drawSquare(GuiGraphics guiGraphics, DT_XYWH dt_xywh, int color){
         drawSquare(guiGraphics,dt_xywh.x(),dt_xywh.y(),dt_xywh.width(),dt_xywh.height(),color);
     }
     protected void drawSquare(GuiGraphics guiGraphics,int color){

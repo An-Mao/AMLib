@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 
-public class RouletteMenu extends RenderWidgetCore {
+public class RouletteMenu extends RenderWidgetCore<RouletteMenu> {
     private int sectors = 9;
     private int outerRadius = 80;
     private int highlightColor = 0x50646464;

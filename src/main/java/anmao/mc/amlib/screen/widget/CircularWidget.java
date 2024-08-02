@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.awt.*;
 import java.util.List;
 
-public class CircularWidget extends RenderWidgetCore {
+public class CircularWidget extends RenderWidgetCore<CircularWidget> {
     protected FlipMode flipMode;
     protected int sectors;
     protected int textNormalColor , textSelectColor;

@@ -1,5 +1,7 @@
-package anmao.mc.amlib.screen.widget;
+package anmao.mc.amlib.screen.widget.image;
 
+import anmao.mc.amlib.screen.widget.DT_XYWHUV;
+import anmao.mc.amlib.screen.widget.RenderWidgetCore;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

@@ -1,6 +1,8 @@
-package anmao.mc.amlib.screen.widget;
+package anmao.mc.amlib.screen.widget.image;
 
 import anmao.mc.amlib.component.ToolTip;
+import anmao.mc.amlib.screen.widget.DT_ImageInfo;
+import anmao.mc.amlib.screen.widget.DT_XYWH;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,7 +22,7 @@ public class ImageButton extends AbstractWidget implements Renderable {
     private MouseType mouseType = MouseType.Normal;
     private final OnPress onPress;
     private ToolTip tip;
-    public ImageButton(DT_ImageInfo imageInfo, DT_XYWH xywh, Component pMessage,OnPress onPress ) {
+    public ImageButton(DT_ImageInfo imageInfo, DT_XYWH xywh, Component pMessage, OnPress onPress ) {
         this(imageInfo,xywh.x(), xywh.y(), xywh.width(), xywh.height(), pMessage,onPress);
     }
     public ImageButton(DT_ImageInfo imageInfo, int pX, int pY, int pWidth, int pHeight, Component pMessage,OnPress onPress ) {
