@@ -1,25 +1,21 @@
-package anmao.mc.amlib.screen.widget;
+package anmao.mc.amlib.screen.widget.square;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
-public class SquareImageButton extends RenderWidgetCore {
+@OnlyIn(Dist.CLIENT)
+public class SquareImageButton extends SquareWidgetCore<SquareImageButton> {
     private final OnPress onPress;
     protected int textUsualColor, textSelectColor;
     private  int dx = getX()+width/2;
     private  int dy = getY()+height/ 2 - font.lineHeight/2;
-    public SquareImageButton(Font font, DT_XYWH dt_xywh, Component pMessage, OnPress onPress) {
-        super(dt_xywh, pMessage);
-        this.onPress = onPress;
-        this.font = font;
-    }
-    public SquareImageButton(DT_XYWH dt_xywh, Component pMessage, OnPress onPress) {
-        this(Minecraft.getInstance().font,dt_xywh,pMessage,onPress);
-    }
 
+    public SquareImageButton( int x, int y, int w, int h, Component pMessage, OnPress onPress) {
+        super(x, y, w, h, pMessage);
+        this.onPress = onPress;
+    }
     public void setDx(int dx) {
         this.dx = dx;
     }
@@ -39,7 +35,7 @@ public class SquareImageButton extends RenderWidgetCore {
     public void onClick(double pMouseX, double pMouseY) {
         this.onPress.onPress();
     }
-
+/*
     @Override
     protected void renderWidget(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         if (isMouseOver(pMouseX,pMouseY)){
@@ -49,7 +45,7 @@ public class SquareImageButton extends RenderWidgetCore {
                     drawImage(pGuiGraphics,dt_xywhuv);
                 }
             }else {
-                drawSquare(pGuiGraphics,bgSelectColor);
+                drawSquare(pGuiGraphics, backgroundHoverColor);
                 pGuiGraphics.setColor(1.0f,1.0f,1.0f,1.0f);
                 pGuiGraphics.drawCenteredString(font,getMessage(),dx,dy,textSelectColor);
                 //drawString(pGuiGraphics,getX() ,getY(),textSelectColor,getMessage());
@@ -62,11 +58,27 @@ public class SquareImageButton extends RenderWidgetCore {
                     drawImage(pGuiGraphics,dt_xywhuv);
                 }
             }else {
-                drawSquare(pGuiGraphics,bgUsualColor);
+                drawSquare(pGuiGraphics, backgroundUsualColor);
                 pGuiGraphics.setColor(1.0f,1.0f,1.0f,1.0f);
                 pGuiGraphics.drawCenteredString(font,getMessage(),dx,dy,textUsualColor);
                 //drawString(pGuiGraphics,getX(),getY(),textUsualColor,getMessage());
             }
+        }
+    }
+
+
+ */
+    @Override
+    protected void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        if (isMouseOver(mouseX,mouseY)){
+            drawSquare(guiGraphics, backgroundHoverColor);
+            guiGraphics.setColor(1.0f,1.0f,1.0f,1.0f);
+            guiGraphics.drawCenteredString(font,getMessage(),dx,dy,textSelectColor);
+            guiGraphics.renderTooltip(font,getMessage(),mouseX,mouseY);
+        }else {
+            drawSquare(guiGraphics, backgroundUsualColor);
+            guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+            guiGraphics.drawCenteredString(font, getMessage(), dx, dy, textUsualColor);
         }
     }
 }

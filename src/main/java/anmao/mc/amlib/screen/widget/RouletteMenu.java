@@ -5,8 +5,11 @@ import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
-public class RouletteMenu extends RenderWidgetCore {
+@OnlyIn(Dist.CLIENT)
+public class RouletteMenu extends RenderWidgetCore<RouletteMenu> {
     private int sectors = 9;
     private int outerRadius = 80;
     private int highlightColor = 0x50646464;
@@ -63,8 +66,8 @@ public class RouletteMenu extends RenderWidgetCore {
                     buffer.addVertex(x2, y2, 0).setColor(bgColor);//.endVertex();
                 }
             }
-
             BufferUploader.drawWithShader(buffer.buildOrThrow());
+            //tesselator.end();
         }
     }
 }

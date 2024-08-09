@@ -5,7 +5,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
-
+@OnlyIn(Dist.CLIENT)
 public class DT_ListBoxData {
     private final Component component;
     private final Object value;

@@ -65,8 +65,9 @@ configurations {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //minecraftLibrary "anmao.dev:core:$core_version"
 
-    jarJar(group:'anmao.dev', name:'core', version:'[1.0.2,)')
+    jarJar(group:'anmao.dev', name:'core', version:"[$core_version,)")
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -81,7 +82,8 @@ tasks.withType(ProcessResources).configureEach {
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            mod_description        : mod_description
+            mod_description        : mod_description,
+            core_version: core_version
     ]
     inputs.properties replaceProperties
 
