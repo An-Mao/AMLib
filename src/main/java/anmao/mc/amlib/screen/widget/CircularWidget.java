@@ -1,7 +1,7 @@
 package anmao.mc.amlib.screen.widget;
 
-import anmao.mc.amlib.debug.DeBug;
-import anmao.mc.amlib.math._Math;
+import anmao.dev.core.debug.DeBug;
+import anmao.dev.core.math._Math;
 import anmao.mc.amlib.render.Draw;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.awt.*;
 import java.util.List;
 
-public class CircularWidget extends RenderWidgetCore {
+public class CircularWidget extends RenderWidgetCore<CircularWidget> {
     protected FlipMode flipMode;
     protected int sectors;
     protected int textNormalColor , textSelectColor;
@@ -46,8 +46,8 @@ public class CircularWidget extends RenderWidgetCore {
         setSectors(sectors);
         setInnerRadius(innerRadius);
         setOuterRadius(outerRadius);
-        setBgSelectColor(highlightColor);
-        setBgUsualColor(normalColor);
+        setBackgroundHoverColor(highlightColor);
+        setBackgroundUsualColor(normalColor);
         setTextNormalColor(Color.green.getRGB());
         setTextSelectColor(Color.YELLOW.getRGB());
         setFlipMode(FlipMode.tire);
@@ -182,10 +182,10 @@ public class CircularWidget extends RenderWidgetCore {
                 double startAngle = i * fanArc;
                 double endAngle = (i + 1) * fanArc;
 
-                int bgc = bgUsualColor , tc = textNormalColor;
+                int bgc = backgroundUsualColor, tc = textNormalColor;
                 float size = 1;
                 if (angle >= startAngle  && angle < endAngle) {
-                    bgc = bgSelectColor;
+                    bgc = backgroundHoverColor;
                     tc = textSelectColor;
                     size = 1.3f;
                     this.index = sIndex;

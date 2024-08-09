@@ -2,7 +2,7 @@ package anmao.mc.amlib.amlib.gui;
 
 import anmao.mc.amlib.AMLib;
 import anmao.mc.amlib.amlib.config.Configs;
-import anmao.mc.amlib.color._ColorCDT;
+import anmao.dev.core.color._ColorCDT;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

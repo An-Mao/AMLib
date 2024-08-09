@@ -1,6 +1,6 @@
 package anmao.mc.amlib.render;
 
-import anmao.mc.amlib.color._ColorCDT;
+import anmao.dev.core.color._ColorCDT;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

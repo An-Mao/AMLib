@@ -1,15 +1,12 @@
 package anmao.mc.amlib.screen.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 
-public class RouletteMenu extends RenderWidgetCore {
+public class RouletteMenu extends RenderWidgetCore<RouletteMenu> {
     private int sectors = 9;
     private int outerRadius = 80;
     private int highlightColor = 0x50646464;
@@ -50,23 +47,24 @@ public class RouletteMenu extends RenderWidgetCore {
             }
             double sectorAngle =  2 * Math.PI / sectors;
             Tesselator tesselator = Tesselator.getInstance();
-            BufferBuilder buffer = tesselator.getBuilder();
             RenderSystem.disableCull();
             RenderSystem.enableBlend();
             RenderSystem.setShader(GameRenderer::getPositionColorShader);
+            BufferBuilder buffer = tesselator.getBuilder();
             buffer.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-            buffer.vertex(centerX, centerY, 0.0).color(normalColor).endVertex();
+            buffer.vertex(centerX, centerY, 0.0f).color(normalColor).endVertex();
 
             for (int i = 0; i < sectors; i++) {
                 double startAngle = i * sectorAngle;
                 double endAngle = (i + 1) * sectorAngle;
                 int bgColor = (angle >= startAngle && angle < endAngle) ? highlightColor : normalColor;
                 for (double a = startAngle; a < endAngle; a += Math.PI / 180) {
-                    double x2 = centerX + Math.cos(a) * outerRadius;
-                    double y2 = centerY + Math.sin(a) * outerRadius;
+                    float x2 = (float) (centerX + Math.cos(a) * outerRadius);
+                    float y2 = (float) (centerY + Math.sin(a) * outerRadius);
                     buffer.vertex(x2, y2, 0).color(bgColor).endVertex();
                 }
             }
+            //BufferUploader.drawWithShader(buffer.buildOrThrow());
             tesselator.end();
         }
     }

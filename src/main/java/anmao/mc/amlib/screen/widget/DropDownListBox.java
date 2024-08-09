@@ -1,7 +1,7 @@
 package anmao.mc.amlib.screen.widget;
 
-import anmao.mc.amlib.color._ColorCDT;
-import anmao.mc.amlib.debug.DeBug;
+import anmao.dev.core.color._ColorCDT;
+import anmao.dev.core.debug.DeBug;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -19,28 +19,38 @@ import java.util.Optional;
 @OnlyIn(Dist.CLIENT)
 public class DropDownListBox extends DropDownListBoxCore {
     private final DT_XYWH dt_xywh;
-    private final List<DT_ListBoxData> dataList;
+    private List<DT_ListBoxData> dataList;
     private final Component msg;
     private int nowSelectIndex = -1;
     private boolean showList = false;
     private int line,lineHeight,linePosY;
     private int pages,nowPage;
     private int layerZ = 300;
-    public DropDownListBox(DT_XYWH dt_xywh, Component pMessage, DT_ListBoxData... data) {
-        this(dt_xywh,pMessage,Arrays.asList(data));
+    public DropDownListBox(int x, int y, int w, int h, Component pMessage, DT_ListBoxData... data) {
+        this(x,y,w,h,pMessage,Arrays.asList(data));
     }
-    public DropDownListBox(DT_XYWH dt_xywh, Component pMessage,List<DT_ListBoxData> data) {
-        super(dt_xywh.x(), dt_xywh.y(), dt_xywh.width(), dt_xywh.height(), pMessage);
+    public DropDownListBox(int x, int y, int w, int h, Component pMessage,List<DT_ListBoxData> data) {
+        super(x, y, w, h, pMessage);
+        dt_xywh = new DT_XYWH(x,y,w,h);
         this.texture = null;
-
         setTextColor(_ColorCDT.black,_ColorCDT.black,_ColorCDT.blue);
         setBgColor(Color.LIGHT_GRAY.getRGB(),_ColorCDT.white, Color.GRAY.getRGB());
-
-        this.dt_xywh = dt_xywh;
         this.dataList = data;
         this.msg = pMessage;
         setLine(7);
     }
+    public void setDataList(DT_ListBoxData... data) {
+        setDataList(Arrays.asList(data));
+    }
+
+    public void setDataList(List<DT_ListBoxData> dataList) {
+        nowPage = 1;
+        nowSelectIndex = -1;
+        this.dataList = dataList;
+    }
+
+
+
     public void setLine(int line){
         this.line = line;
         lineHeight = this.dt_xywh.height() * line;

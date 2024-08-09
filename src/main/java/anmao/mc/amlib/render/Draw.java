@@ -1,6 +1,6 @@
 package anmao.mc.amlib.render;
 
-import anmao.mc.amlib.math._MathCDT;
+import anmao.dev.core.math._MathCDT;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;

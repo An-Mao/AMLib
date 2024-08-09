@@ -20,7 +20,7 @@ public class DT_ImageInfo {
         this(image,imageWidth,imageHeight,elementWidth,elementHeight,0,0);
     }
     public DT_ImageInfo(String image, int imageWidth, int imageHeight, int elementWidth, int elementHeight, int u, int v) {
-        this(new ResourceLocation(image),imageWidth,imageHeight,elementWidth,elementHeight,u,v);
+        this(ResourceLocation.tryParse(image),imageWidth,imageHeight,elementWidth,elementHeight,u,v);
     }
     public DT_ImageInfo(ResourceLocation image, int imageWidth, int imageHeight, int elementWidth, int elementHeight, int u, int v) {
         this.image = image;

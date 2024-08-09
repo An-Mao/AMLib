@@ -1,7 +1,7 @@
 package anmao.mc.amlib.amlib.config.attribute;
 
 import anmao.mc.amlib.CDT;
-import anmao.mc.amlib.json.JsonConfig;
+import anmao.dev.core.json.JsonConfig;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.Map;

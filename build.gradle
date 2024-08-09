@@ -55,8 +55,8 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-    config "${mod_id}.mixins.json"
+    add sourceSets.main, "refmap.${mod_id}.json"
+    config "mixins.${mod_id}.json"
 }
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
@@ -71,10 +71,9 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '15.4'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    minecraftLibrary 'anmao.dev:core:1.0.2'
+    minecraftLibrary "anmao.dev:core:$core_version"
 
-
-    jarJar(group:'anmao.dev', name:'core', version:'[1.0.2,)')
+    jarJar(group:'anmao.dev', name:'core', version:"[$core_version,)")
 
     //jarJar(group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '[15.4,)')
 }
@@ -88,6 +87,7 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description,
+            core_version: core_version,
     ]
 
     inputs.properties replaceProperties
