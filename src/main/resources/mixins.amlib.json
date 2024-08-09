@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "anmao.mc.amlib.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "AMLib.refmap.json",
+  "refmap": "refmap.amlib.json",
   "mixins": [
     "AttributeMixin",
     "EntityMixin",
