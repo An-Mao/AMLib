@@ -1,6 +1,8 @@
 package anmao.mc.amlib.screen.widget;
 
+import anmao.dev.core.color.ColorScheme;
 import anmao.dev.core.math._Math;
+import anmao.mc.amlib.amlib.color.ColorSchemes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,7 +13,9 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @OnlyIn(Dist.CLIENT)
 public abstract class RenderWidgetCore<T extends RenderWidgetCore<T>> extends AbstractWidget implements Renderable {
     protected Font font;
@@ -19,16 +23,25 @@ public abstract class RenderWidgetCore<T extends RenderWidgetCore<T>> extends Ab
     protected int textUsualColor, textHoverColor, backgroundUsualColor, backgroundHoverColor;
     protected int layerZ = 1000;
     protected int halfFontLine ;
+    protected List<Component> customToolTip = new ArrayList<>();
     public RenderWidgetCore(int x,int y,int w,int h, Component pMessage) {
         this(Minecraft.getInstance().font,x,y,w,h,pMessage);
     }
     public RenderWidgetCore(Font font,int x,int y,int w,int h, Component pMessage) {
         super(x, y, w, h, pMessage);
         setFont(font);
-        this.backgroundUsualColor = Color.gray.getRGB();
-        this.backgroundHoverColor = Color.LIGHT_GRAY.getRGB();
+        setColorScheme(ColorSchemes.getGlobal());
     }
 
+    public T setColorScheme(ColorScheme colorScheme) {
+        ColorScheme.Color color = colorScheme.getColor("text");
+        this.textHoverColor = color.HoverColor();
+        this.textUsualColor = color.UsualColor();
+        color = colorScheme.getColor("background");
+        this.backgroundHoverColor = color.HoverColor();
+        this.backgroundUsualColor = color.UsualColor();
+        return self();
+    }
     protected T self(){
         return (T) this;
     }
@@ -119,6 +132,14 @@ public abstract class RenderWidgetCore<T extends RenderWidgetCore<T>> extends Ab
     }
     protected void drawString(GuiGraphics guiGraphics,int x,int y,Component component){
         drawString(guiGraphics,font,x,y, backgroundUsualColor,false,component);
+    }
+
+    public void setCustomToolTip(List<Component> customToolTip) {
+        this.customToolTip = customToolTip;
+    }
+
+    public List<Component> getCustomTooltip() {
+        return customToolTip;
     }
 
     @Override

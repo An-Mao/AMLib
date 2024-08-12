@@ -13,6 +13,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.List;
+
 @OnlyIn(Dist.CLIENT)
 public class CircularWidget extends RenderWidgetCore<CircularWidget> {
     protected FlipMode flipMode;

@@ -1,9 +1,12 @@
 package anmao.mc.amlib.amlib.event;
 
 import anmao.mc.amlib.AMLib;
+import anmao.mc.amlib.amlib.util.KeyBinding;
 import anmao.mc.amlib.item.ItemHelper;
+import anmao.mc.amlib.screen.SettingScreen;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -32,6 +35,14 @@ public class ForgeClientEvent {
         }
 
          */
+        if (event.getKey() == KeyBinding.OPEN_MENU.getKey().getValue()) {
+            Screen screen = Minecraft.getInstance().screen;
+            if (event.getAction() == 1) {
+                if (screen == null) {
+                    Minecraft.getInstance().setScreen(new SettingScreen());
+                }
+            }
+        }
     }
     public static void outputAttributes(){
         Minecraft minecraft = Minecraft.getInstance();

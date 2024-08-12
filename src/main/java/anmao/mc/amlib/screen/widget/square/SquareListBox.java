@@ -13,6 +13,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 import java.util.Optional;
+
 @OnlyIn(Dist.CLIENT)
 public class SquareListBox extends SquareWidgetCore<SquareListBox> {
     private List<DT_ListBoxData> data;

@@ -1,0 +1,32 @@
+{
+  "amlib": "AM Lib",
+  "key.category.amlib.mc": "AM Lib",
+  "key.amlib.open_menu": "打开设置",
+
+  "color_scheme.amlib.default": "默认",
+  "color_scheme.amlib.cold_gray": "冷灰色",
+  "color_scheme.amlib.blue_fresh": "蓝色清新",
+  "color_scheme.amlib.natural_greenery": "自然绿意",
+  "color_scheme.amlib.ocean_breeze": "海洋微风",
+  "color_scheme.amlib.sunset_glow": "落日余晖",
+  "color_scheme.amlib.fresh_mint": "清新薄荷",
+  "color_scheme.amlib.autumn_leaves": "秋叶",
+  "color_scheme.amlib.twilight_purple": "暮光紫",
+
+  "color_scheme.amlib.midnight_blue": "午夜蓝",
+  "color_scheme.amlib.coral_reef": "珊瑚礁",
+  "color_scheme.amlib.emerald_green": "翡翠绿",
+  "color_scheme.amlib.soft_lavender": "柔和薰衣草",
+  "color_scheme.amlib.golden_sands": "金色沙滩",
+
+  "color_scheme.amlib.crimson_tide": "深红潮汐",
+  "color_scheme.amlib.misty_violet": "薄雾紫罗兰",
+  "color_scheme.amlib.teal_whisper": "青色低语",
+  "color_scheme.amlib.amber_blaze": "琥珀之焰",
+  "color_scheme.amlib.peach_melba": "蜜桃梅尔巴",
+
+  "screen.amlib.settings.title": "设置",
+  "screen.amlib.settings.label.select_color": "选择配色方案",
+  "screen.amlib.settings.drop_down_select.color_scheme": "配色方案",
+  "screen.amlib.settings.button.save": "保存"
+}

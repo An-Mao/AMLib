@@ -1,0 +1,32 @@
+{
+  "amlib": "AM Lib",
+  "key.category.amlib.mc": "AM Lib",
+  "key.amlib.open_menu": "Open Menu",
+
+
+  "color_scheme.amlib.default": "Default",
+  "color_scheme.amlib.cold_gray": "Cold Gray",
+  "color_scheme.amlib.blue_fresh": "Blue Fresh",
+  "color_scheme.amlib.natural_greenery": "Natural Greenery",
+  "color_scheme.amlib.ocean_breeze": "Ocean Breeze",
+  "color_scheme.amlib.sunset_glow": "Sunset Glow",
+  "color_scheme.amlib.fresh_mint": "Fresh Mint",
+  "color_scheme.amlib.autumn_leaves": "Autumn Leaves",
+  "color_scheme.amlib.twilight_purple": "Twilight Purple",
+
+  "color_scheme.amlib.midnight_blue": "Midnight Blue",
+  "color_scheme.amlib.coral_reef": "Coral Reef",
+  "color_scheme.amlib.emerald_green": "Emerald Green",
+  "color_scheme.amlib.soft_lavender": "Soft Lavender",
+  "color_scheme.amlib.golden_sands": "Golden Sands",
+  "color_scheme.amlib.crimson_tide": "Crimson Tide",
+  "color_scheme.amlib.misty_violet": "Misty Violet",
+  "color_scheme.amlib.teal_whisper": "Teal Whisper",
+  "color_scheme.amlib.amber_blaze": "Amber Blaze",
+  "color_scheme.amlib.peach_melba": "Peach Melba",
+
+  "screen.amlib.settings.title": "Setting",
+  "screen.amlib.settings.label.select_color": "Select Color Scheme",
+  "screen.amlib.settings.drop_down_select.color_scheme": "Color Scheme",
+  "screen.amlib.settings.button.save": "Save"
+}

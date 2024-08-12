@@ -6,13 +6,13 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class SquareImageButton extends SquareWidgetCore<SquareImageButton> {
+public class SquareButton extends SquareWidgetCore<SquareButton> {
     private final OnPress onPress;
     protected int textUsualColor, textSelectColor;
     private  int dx = getX()+width/2;
     private  int dy = getY()+height/ 2 - font.lineHeight/2;
 
-    public SquareImageButton( int x, int y, int w, int h, Component pMessage, OnPress onPress) {
+    public SquareButton(int x, int y, int w, int h, Component pMessage, OnPress onPress) {
         super(x, y, w, h, pMessage);
         this.onPress = onPress;
     }

@@ -25,10 +25,12 @@ configurations {
     libraries
     implementation.extendsFrom libraries
 }
-
+/*
 dependencies {
     libraries fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+ */
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
@@ -64,10 +66,14 @@ configurations {
 }
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])
     //minecraftLibrary "anmao.dev:core:$core_version"
 
+    libraries "anmao.dev:core:$core_version"
+    implementation "anmao.mc:net:$net_version"
+
     jarJar(group:'anmao.dev', name:'core', version:"[$core_version,)")
+    jarJar(group:'anmao.mc', name:'net', version:"[$net_version,)")
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -83,6 +89,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_version            : mod_version,
             mod_authors            : mod_authors,
             mod_description        : mod_description,
+            net_version: net_version,
             core_version: core_version
     ]
     inputs.properties replaceProperties

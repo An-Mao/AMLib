@@ -12,7 +12,8 @@ public class SimpleLabel extends SimpleWidgetCore<SimpleLabel> {
     private boolean AutoWidth, AutoHeight;
     private boolean centerText;
     public SimpleLabel(int x, int y, int w, int h, Component pMessage, int borderColor,int fillColor,  int textColor, boolean AutoWidth, boolean AutoHeight,boolean centerText) {
-        super(x, y, w, h,pMessage);
+        super(x, y, w, h, pMessage);
+
         setAutoWidth(AutoWidth);
         setAutoHeight(AutoHeight);
         setCenterText(centerText);
@@ -22,6 +23,7 @@ public class SimpleLabel extends SimpleWidgetCore<SimpleLabel> {
         setBackgroundUsualColor(fillColor);
         setTextUsualColor(textColor);
         setTextHoverColor(textColor);
+
     }
     public SimpleLabel(int x, int y, int w, int h, Component pMessage,  boolean AutoWidth, boolean AutoHeight,boolean centerText) {
         super(x, y, w, h,pMessage);
@@ -104,6 +106,9 @@ public class SimpleLabel extends SimpleWidgetCore<SimpleLabel> {
         int tc = getTextUsualColor();
         if (isMouseOver(pMouseX,pMouseY)){
             tc = getTextHoverColor();
+            if (getCustomTooltip() != null) {
+                guiGraphics.renderComponentTooltip(getFont(), getCustomTooltip(),pMouseX, pMouseY);
+            }
         }
         if (isCenterText()){
             guiGraphics.drawString(font, getMessage(), getDrawX() - _Math.half(font.width(getMessage())), getDrawY(), tc,false);
