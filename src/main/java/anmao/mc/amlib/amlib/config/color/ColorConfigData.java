@@ -1,11 +1,11 @@
 package anmao.mc.amlib.amlib.config.color;
 
 public class ColorConfigData {
-    private String coloeScheme = "amlib:default";
-    public String getColoeScheme() {
-        return coloeScheme;
+    private String colorScheme = "amlib:default";
+    public String getColorScheme() {
+        return colorScheme;
     }
-    public void setColoeScheme(String coloeScheme) {
-        this.coloeScheme = coloeScheme;
+    public void setColorScheme(String colorScheme) {
+        this.colorScheme = colorScheme;
     }
 }

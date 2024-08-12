@@ -10,7 +10,7 @@ public class ColorConfig extends JsonConfig<ColorConfigData> {
     public ColorConfig() {
         super(filePath, """
                 {
-                  "coloeScheme": "amlib:default"
+                  "colorScheme": "amlib:default"
                 }
                 """, new TypeToken<>() {});
     }

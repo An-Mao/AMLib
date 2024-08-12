@@ -1,7 +1,10 @@
 package anmao.mc.amlib.screen.widget.simple;
 
+import anmao.dev.core.color.ColorHelper;
+import anmao.dev.core.color.ColorScheme;
 import anmao.dev.core.debug.DeBug;
 import anmao.dev.core.math._Math;
+import anmao.mc.amlib.amlib.color.ColorSchemes;
 import anmao.mc.amlib.screen.widget.DT_ListBoxData;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
@@ -31,11 +34,26 @@ public class SimpleDropDownSelectBox extends SimpleWidgetCore<SimpleDropDownSele
     }
     public SimpleDropDownSelectBox(int x, int y, int w, int h,  Component pMessage,List<DT_ListBoxData> data) {
         super(x, y, w, h, pMessage);
-        setBackgroundSelectColor(0x88000000);
-        setTextSelectColor(0xffffffff);
         this.dataList = data;
         setUsualHeight(h);
         setLine(7);
+    }
+
+    public int getNowPage() {
+        return nowPage;
+    }
+
+    public void setNowPage(int nowPage) {
+        this.nowPage = nowPage;
+    }
+
+    @Override
+    public SimpleDropDownSelectBox setColorScheme(ColorScheme colorScheme) {
+        super.setColorScheme(colorScheme);
+        setBackgroundSelectColor(colorScheme.getSelectColor("element_background"));
+        setTextSelectColor(colorScheme.getSelectColor("element_text"));
+        System.out.println("set:"+ ColorHelper.intToHexColor(colorScheme.getSelectColor("element_background")));
+        return self();
     }
 
     public int getBackgroundSelectColor() {
@@ -82,7 +100,7 @@ public class SimpleDropDownSelectBox extends SimpleWidgetCore<SimpleDropDownSele
         setDataList(Arrays.asList(data));
     }
     public void setDataList(List<DT_ListBoxData> dataList) {
-        nowPage = 1;
+        setNowPage(1);
         nowSelectIndex = -1;
         this.dataList = dataList;
     }
@@ -108,7 +126,7 @@ public class SimpleDropDownSelectBox extends SimpleWidgetCore<SimpleDropDownSele
         lineHeight = getUsualContentHeight() * line;
         this.linePosY = Math.max(_Math.half (getUsualContentHeight() - font.lineHeight)+1,0);
         this.pages = getPages(getDataList().size(),line);
-        this.nowPage = 1;
+        setNowPage(1);
         return self();
     }
     public Component getSelectComponent(){
@@ -139,7 +157,7 @@ public class SimpleDropDownSelectBox extends SimpleWidgetCore<SimpleDropDownSele
         return null;
     }
     public DT_ListBoxData getData(int index){
-        int i = (nowPage - 1) * line + index;
+        int i = (getNowPage() - 1) * line + index;
         if (i >= 0 && i < dataList.size()){
             return dataList.get(i);
         }
@@ -173,18 +191,19 @@ public class SimpleDropDownSelectBox extends SimpleWidgetCore<SimpleDropDownSele
     public void onClick(double pMouseX, double pMouseY) {
         super.onClick(pMouseX, pMouseY);
         showList = !showList;
+        int np = getNowPage();
         if (showList){
             setHeight(getUsualHeight() + lineHeight);
         }else {
             setHeight(getUsualHeight());
         }
-        updateIndex(pMouseY);
+        updateIndex(pMouseY,np);
     }
-    public void updateIndex(double mouseY){
+    public void updateIndex(double mouseY,int  page){
         int i = (int) ((mouseY - getContentY()) / getContentH());
         if (i > 0){
             nowSelectIndex = i - 1;
-            nowSelectIndex += (nowPage - 1) * line;
+            nowSelectIndex += (page- 1) * line;
             DT_ListBoxData dropDownListBoxData = getSelectData();
             if (dropDownListBoxData != null) {
                 dropDownListBoxData.OnPress(getSelectValue());
@@ -198,10 +217,10 @@ public class SimpleDropDownSelectBox extends SimpleWidgetCore<SimpleDropDownSele
     public boolean mouseScrolled(double pMouseX, double pMouseY, double sx,double sy) {
         if (showList) {
             if (isInWidget(pMouseX,pMouseY)) {
-                if (sy < 0 && nowPage < pages){
-                    nowPage ++;
-                }else if (sy > 0 && nowPage > 1){
-                    nowPage --;
+                if (sy < 0 && getNowPage() < pages){
+                    setNowPage(getNowPage() + 1);
+                }else if (sy > 0 && getNowPage() > 1){
+                    setNowPage(getNowPage() - 1);
                 }
                 return true;
             }

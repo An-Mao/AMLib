@@ -25,10 +25,22 @@ public abstract class SimpleWidgetCore<T extends SimpleWidgetCore<T>> extends Re
             contentEndX,
             contentEndY;
     protected SimpleWidgetCore(int x, int y, int w, int h, Component pMessage) {
-        this(x, y, w, h,2,0xFF000000,0xFF000000,0xffffffff,0xff0000ff, pMessage);
+        this(x, y, w, h,2, pMessage);
+    }
+    protected SimpleWidgetCore(int x, int y, int w, int h,int r, Component pMessage) {
+        super(x, y, w, h, pMessage);
+        setRadius(r);
     }
     protected SimpleWidgetCore(int x, int y, int w, int h, int radius, int borderUsualColor, int borderHoverColor,int textUsualColor,int textHoverColor, Component pMessage) {
-        this(x,y,w,h,radius,borderUsualColor,borderHoverColor,textUsualColor,textHoverColor,0x77000000,0x77000000,pMessage);
+        super(x, y, w, h, pMessage);
+
+        setTextUsualColor(textUsualColor);
+        setTextHoverColor(textHoverColor);
+        setBorderUsualColor(borderUsualColor);
+        setBorderHoverColor(borderHoverColor);
+
+        setRadius(radius);
+
     }
     protected SimpleWidgetCore(int x, int y, int w, int h, int radius, int borderUsualColor, int borderHoverColor,int textUsualColor,int textHoverColor,int backgroundUsualColor,int backgroundHoverColor,  Component pMessage) {
         super(x, y, w, h, pMessage);
@@ -39,6 +51,7 @@ public abstract class SimpleWidgetCore<T extends SimpleWidgetCore<T>> extends Re
         setBorderHoverColor(borderHoverColor);
         setBackgroundUsualColor(backgroundUsualColor);
         setBackgroundHoverColor(backgroundHoverColor);
+
         setRadius(radius);
 
     }

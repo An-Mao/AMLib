@@ -30,18 +30,13 @@ public abstract class RenderWidgetCore<T extends RenderWidgetCore<T>> extends Ab
         super(x, y, w, h, pMessage);
         setFont(font);
         setColorScheme(ColorSchemes.getGlobal());
-        /*
-        this.backgroundUsualColor = Color.gray.getRGB();
-        this.backgroundHoverColor = Color.LIGHT_GRAY.getRGB();
-
-         */
     }
 
     public T setColorScheme(ColorScheme colorScheme) {
-        ColorScheme.Color color = ColorSchemes.getGlobal().getColor("text");
+        ColorScheme.Color color = colorScheme.getColor("text");
         this.textHoverColor = color.HoverColor();
         this.textUsualColor = color.UsualColor();
-        color = ColorSchemes.getGlobal().getColor("background");
+        color = colorScheme.getColor("background");
         this.backgroundHoverColor = color.HoverColor();
         this.backgroundUsualColor = color.UsualColor();
         return self();

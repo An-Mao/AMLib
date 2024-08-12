@@ -52,13 +52,13 @@ public class SimpleListBox extends SimpleWidgetCore<SimpleListBox> {
     @Override
     public SimpleListBox setColorScheme(ColorScheme colorScheme) {
         super.setColorScheme(colorScheme);
-        ColorScheme.Color color = ColorSchemes.getGlobal().getColor("element_border");
+        ColorScheme.Color color = colorScheme.getColor("element_border");
         this.elementalBorderHoverColor = color.HoverColor();
         this.elementalBorderUsualColor = color.UsualColor();
-        color = ColorSchemes.getGlobal().getColor("element_text");
+        color = colorScheme.getColor("element_text");
         this.elementalTextHoverColor = color.HoverColor();
         this.elementalTextUsualColor = color.UsualColor();
-        color = ColorSchemes.getGlobal().getColor("element_background");
+        color = colorScheme.getColor("element_background");
         this.elementalBackgroundHoverColor = color.HoverColor();
         this.elementalBackgroundUsualColor = color.UsualColor();
         return self();
