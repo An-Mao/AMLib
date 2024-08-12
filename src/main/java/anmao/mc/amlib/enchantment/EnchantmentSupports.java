@@ -1,5 +1,6 @@
 package anmao.mc.amlib.enchantment;
 
+import anmao.mc.amlib.server.ServerSupports;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -20,6 +21,9 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 
 public class EnchantmentSupports {
+    public static Registry<Enchantment> getRegistry() {
+        return ServerSupports.getOverworldLevel().registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+    }
     public static Registry<Enchantment> getRegistry(Level level) {
         return level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
     }

@@ -1,5 +1,6 @@
 package anmao.mc.amlib;
 
+import anmao.mc.amlib.amlib.color.ColorSchemeRegister;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -9,6 +10,7 @@ public class AMLib {
     public static final String MOD_ID = "amlib";
     public AMLib() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ColorSchemeRegister.register(modEventBus);
         test();
     }
     private void test( ) {

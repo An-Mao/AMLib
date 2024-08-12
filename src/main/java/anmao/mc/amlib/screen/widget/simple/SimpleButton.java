@@ -9,8 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class SimpleButton extends SimpleLabel {
     private final OnPress onPress;
     public SimpleButton(int x, int y, int w, int h, Component pMessage, OnPress onPress) {
-        super(x, y, w, h, pMessage,true,false,true);
-        this.onPress = onPress;
+        this(x, y, w, h, pMessage,true,false,true,onPress);
     }
     public SimpleButton(int x, int y, int w, int h, Component pMessage, boolean AutoWidth, boolean AutoHeight, boolean centerText, OnPress onPress) {
         super(x, y, w, h, pMessage,AutoWidth,AutoHeight,centerText);

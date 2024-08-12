@@ -1,5 +1,6 @@
 package anmao.mc.amlib.screen.widget.simple;
 
+import anmao.dev.core.color.ColorScheme;
 import anmao.dev.core.math._Math;
 import anmao.mc.amlib.render.Draw;
 import anmao.mc.amlib.screen.widget.RenderWidgetCore;
@@ -31,6 +32,7 @@ public abstract class SimpleWidgetCore<T extends SimpleWidgetCore<T>> extends Re
     }
     protected SimpleWidgetCore(int x, int y, int w, int h, int radius, int borderUsualColor, int borderHoverColor,int textUsualColor,int textHoverColor,int backgroundUsualColor,int backgroundHoverColor,  Component pMessage) {
         super(x, y, w, h, pMessage);
+
         setTextUsualColor(textUsualColor);
         setTextHoverColor(textHoverColor);
         setBorderUsualColor(borderUsualColor);
@@ -38,6 +40,15 @@ public abstract class SimpleWidgetCore<T extends SimpleWidgetCore<T>> extends Re
         setBackgroundUsualColor(backgroundUsualColor);
         setBackgroundHoverColor(backgroundHoverColor);
         setRadius(radius);
+
+    }
+
+    @Override
+    public T setColorScheme(ColorScheme colorScheme) {
+        super.setColorScheme(colorScheme);
+        setBorderUsualColor(colorScheme.getColor("border").UsualColor());
+        setBorderHoverColor(colorScheme.getColor("border").HoverColor());
+        return self();
     }
 
     @Override
@@ -166,33 +177,37 @@ public abstract class SimpleWidgetCore<T extends SimpleWidgetCore<T>> extends Re
         BufferUploader.drawWithShader(buffer.buildOrThrow());
         poseStack.popPose();
         // Draw borders and corners
+        poseStack.pushPose();
+        matrix = poseStack.last().pose();
         buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-        drawBorder(buffer, x, y, width, height, radius, borderColor);
+        drawBorder(buffer, matrix,x, y, width, height, radius, borderColor);
         BufferUploader.drawWithShader(buffer.buildOrThrow());
+        poseStack.popPose();
+
         drawCorners(poseStack, x, y, width, height, radius, borderColor);
         RenderSystem.disableBlend();
     }
-    protected void drawBorder(BufferBuilder buffer, int x, int y, int width, int height, int radius, int borderColor) {
+    protected void drawBorder(BufferBuilder buffer,Matrix4f matrix, int x, int y, int width, int height, int radius, int borderColor) {
         // Top border
-        addVertex(buffer, x + radius, y, borderColor);
-        addVertex(buffer, x + width - radius, y, borderColor);
-        addVertex(buffer, x + width - radius, y + radius, borderColor);
-        addVertex(buffer, x + radius, y + radius, borderColor);
+        addVertex(buffer,matrix, x + radius, y, borderColor);
+        addVertex(buffer,matrix, x + width - radius, y, borderColor);
+        addVertex(buffer,matrix, x + width - radius, y + radius, borderColor);
+        addVertex(buffer,matrix, x + radius, y + radius, borderColor);
         // Bottom border
-        addVertex(buffer, x + radius, y + height - radius, borderColor);
-        addVertex(buffer, x + width - radius, y + height - radius, borderColor);
-        addVertex(buffer, x + width - radius, y + height, borderColor);
-        addVertex(buffer, x + radius, y + height, borderColor);
+        addVertex(buffer,matrix, x + radius, y + height - radius, borderColor);
+        addVertex(buffer,matrix, x + width - radius, y + height - radius, borderColor);
+        addVertex(buffer,matrix, x + width - radius, y + height, borderColor);
+        addVertex(buffer,matrix, x + radius, y + height, borderColor);
         // Left border
-        addVertex(buffer, x, y + radius, borderColor);
-        addVertex(buffer, x + radius, y + radius, borderColor);
-        addVertex(buffer, x + radius, y + height - radius, borderColor);
-        addVertex(buffer, x, y + height - radius, borderColor);
+        addVertex(buffer,matrix, x, y + radius, borderColor);
+        addVertex(buffer,matrix, x + radius, y + radius, borderColor);
+        addVertex(buffer,matrix, x + radius, y + height - radius, borderColor);
+        addVertex(buffer,matrix, x, y + height - radius, borderColor);
         // Right border
-        addVertex(buffer, x + width - radius, y + radius, borderColor);
-        addVertex(buffer, x + width, y + radius, borderColor);
-        addVertex(buffer, x + width, y + height - radius, borderColor);
-        addVertex(buffer, x + width - radius, y + height - radius, borderColor);
+        addVertex(buffer,matrix, x + width - radius, y + radius, borderColor);
+        addVertex(buffer,matrix, x + width, y + radius, borderColor);
+        addVertex(buffer,matrix, x + width, y + height - radius, borderColor);
+        addVertex(buffer,matrix, x + width - radius, y + height - radius, borderColor);
     }
     protected void drawCorners(PoseStack poseStack, int x, int y, int width, int height, int radius, int color) {
         //PoseStack poseStack = guiGraphics.pose();
